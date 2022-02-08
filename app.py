@@ -1,5 +1,5 @@
 from flask import Flask
-from models import db, seedData, user_manager, User
+from models import db, seedData, User, user_manager
 from flask_migrate import Migrate, upgrade
 from areas.site.sitePages import siteBluePrint
 from areas.products.productPages import productBluePrint
