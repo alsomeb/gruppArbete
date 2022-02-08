@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from .services import getCategory, getTrendingCategories, getProduct, getTrendingProducts
+from flask_user import roles_accepted, roles_required
 
 
 
