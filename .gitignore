@@ -2,5 +2,6 @@
 /__pycache__
 config.py
 /config.py
-/areas/site/__pycache__
-/areas/products/__pycache__
+areas/site/__pycache__/
+areas/products/__pycache__/
+migrations/__pycache__/
