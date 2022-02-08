@@ -22,5 +22,3 @@ if __name__  == "__main__":
         upgrade()
         seedData()
     app.run()
-
-
