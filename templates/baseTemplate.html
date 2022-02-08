@@ -30,7 +30,14 @@
                     <li><a href="#"><i class="fa fa-map-marker"></i> Testgatan 122</a></li>
                 </ul>
                 <ul class="header-links pull-right">
-                    <partial name="_LoginPartial" />
+                    {%  if current_user.is_authenticated  %}
+
+                    <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+                    
+                    {%  else  %}
+                    <li><a href="{{ url_for('user.login') }}">Login</a></li>
+                    <li> <a href="{{ url_for('user.register') }}">Registera</a></li>
+                    {%  endif %}
                 </ul>
             </div>
         </div>
