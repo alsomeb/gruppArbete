@@ -36,7 +36,7 @@
 
                     <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
                     {% if current_user.has_roles("Admin") %}
-                    <li><a href="#">Admin</a></li>
+                    <li><a href="{{ url_for('newsletter.adminNewsletter') }}">Admin</a></li>
                     {% endif %}
                     
                     {%  else  %}

@@ -4,5 +4,7 @@ from flask_user import roles_accepted, roles_required
 newsLetter = Blueprint('newsletter', __name__)
 
 @newsLetter.route('/admin')
+@roles_required("Admin")
 def adminNewsletter() -> str:
-  pass
+  title = "Admin Panel"
+  return render_template("newsletter/admin.html", title=title)
