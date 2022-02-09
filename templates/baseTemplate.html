@@ -35,11 +35,15 @@
                     {%  if current_user.is_authenticated  %}
 
                     <li><a href="{{ url_for('user.logout') }}">Logout</a></li>
+                    {% if current_user.has_roles("Admin") %}
+                    <li><a href="#">Admin</a></li>
+                    {% endif %}
                     
                     {%  else  %}
                     <li><a href="{{ url_for('user.login') }}">Login</a></li>
                     <li> <a href="{{ url_for('user.register') }}">Registera</a></li>
                     {%  endif %}
+
                 </ul>
             </div>
         </div>
