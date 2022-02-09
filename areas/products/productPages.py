@@ -3,7 +3,6 @@ from .services import getCategory, getTrendingCategories, getProduct, getTrendin
 from flask_user import roles_accepted, roles_required
 
 
-
 productBluePrint = Blueprint('product', __name__)
 
 
