@@ -1,11 +1,22 @@
 {% extends "baseTemplate.html" %}
-{% block title %}Start{% endblock %}
+{% block title %}Contact Us{% endblock %}
 {% block maincontent %}
 
 
 
 <h1>Kontakta oss</h1>
 <p>Helst inte</p>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+  Pariatur sint corrupti repellendus illo sed est doloremque numquam accusantium recusandae officiis rerum perferendis architecto error temporibus optio rem ad laboriosam totam officia tempore eveniet, 
+  facere dolores nam. Voluptas eius esse quis libero eligendi atque voluptatibus ab minima? Molestiae inventore quo recusandae perspiciatis, dolorum totam aliquam asperiores facere delectus facilis officia ad deleniti nihil optio nobis distinctio id aliquid. 
+  Voluptates aspernatur nobis omnis maxime recusandae, odit ullam fuga ut ipsam quis ratione sequi. Error dolorem, cum autem enim et tenetur magni quibusdam nulla quis, 
+  delectus soluta quos ducimus expedita nisi veritatis blanditiis!</p>
+
+
+<form method="POST" action="{{ url_for('site.contact') }}">
+  <input type="email" placeholder="Email" name="Email" id="Email">
+  <button type="submit" class="btn btn-secondary btn-sm">Bli Kontaktad</button>
+</form>
 
 
 {% endblock %}
