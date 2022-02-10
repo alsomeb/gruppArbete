@@ -58,6 +58,14 @@ class Product(db.Model):
     Discontinued = db.Column(db.Boolean, unique=False, nullable=False)
 
 
+class SignupsNewsletter(db.Model):
+    __tablename__= "SignupsNewsletter"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    isActive = db.Column(db.Boolean(), nullable=False)
+
+
+
 
 
 def seedData():
