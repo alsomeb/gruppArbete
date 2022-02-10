@@ -8,3 +8,9 @@ newsLetter = Blueprint('newsletter', __name__)
 def adminNewsletter() -> str:
   title = "Admin Panel"
   return render_template("newsletter/admin.html", title=title)
+
+@newsLetter.route('/signUpConfirm', methods=["POST"])
+def signUpConfirm() -> str:
+  title = "Thank You"
+  email = request.form.get('email')
+  return render_template("newsletter/thankYou.html", title=title, email=email)
