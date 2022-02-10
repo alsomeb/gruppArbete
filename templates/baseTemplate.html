@@ -187,14 +187,17 @@
         <!-- container -->
         <div class="container">
             <!-- row -->
+            
             <div class="row">
                 <div class="col-md-12">
                     <div class="newsletter">
+                        {% if not current_user.is_authenticated %}
                         <p>Sign Up for the <strong>NEWSLETTER</strong></p>
                         <form method="POST" action="{{ url_for('newsletter.signUpConfirm') }}">
                             <input class="input" name="email" type="email" placeholder="Enter Your Email">
                             <button class="newsletter-btn"><i class="fa fa-envelope"></i> Subscribe</button>
                         </form>
+                        {% endif %}
                         <ul class="newsletter-follow">
                             <li>
                                 <a href="#"><i class="fa fa-facebook"></i></a>
@@ -212,6 +215,7 @@
                     </div>
                 </div>
             </div>
+            
             <!-- /row -->
         </div>
         <!-- /container -->
