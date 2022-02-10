@@ -1,0 +1,10 @@
+{% extends "baseTemplate.html" %}
+{% from "_formHelpers.html" import render_field %}
+{% block title %} {{ title }} {% endblock %}
+{% block maincontent %}
+<p>
+  This is the info you gave us: <strong> {{ email }} </strong>
+</p>
+
+{% endblock %}
+
