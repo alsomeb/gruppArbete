@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from .services import getCategory, getTrendingCategories, getProduct, getTrendingProducts
-from flask_user import roles_accepted, roles_required
+from flask_user import roles_accepted, roles_required, current_user
 from areas.newsletter.forms import Newsletters
 
 
@@ -11,6 +11,7 @@ productBluePrint = Blueprint('product', __name__)
 
 @productBluePrint.route('/')
 def index() -> str:
+    #HÄR HIDE NEWSLETTER
     trendingCategories = []
     trendingCategories = getTrendingCategories()
     trendingProducts = getTrendingProducts()
