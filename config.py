@@ -1,5 +1,5 @@
 class ConfigDebug():
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:password@localhost/gruppUppgift'    # File-based SQL database
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:mypassword@localhost/gruppUppgift'    # File-based SQL database
     SECRET_KEY = 'SDFA11#'
 
  # Flask-Mail SMTP server settings

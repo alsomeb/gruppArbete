@@ -1,0 +1,31 @@
+{% extends "baseTemplate.html" %}
+{% from "_formHelpers.html" import render_field %}
+{% block title %} {{ title }} {% endblock %}
+{% block maincontent %}
+
+<div class="card" style="width:fit-content;">
+
+    <div class="card-header"> 
+        <h1> {{ newsletter.title }} </h1>
+    </div>
+
+    <div class="card-body">
+        <form method="post">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+
+                {{ render_field(form.title) }}
+                {{ render_field(form.text) }}
+
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+
+            </fieldset>
+
+        </form>
+    </div>
+        
+</div>
+
+{% endblock %}

@@ -88,6 +88,23 @@ def seedData():
     AddLoginIfNotExists("customer@example.com", "Hejsan123#",["Customer"])
 
 
+    #newsletter
+    addNewsletterSignups(db, 'admin@example.com')
+    addNewsletterSignups(db, 'stefan@hotmail.com')
+    addNewsletterSignups(db, 'kalle@outlook.com')
+    addNewsletterSignups(db, 'alle@kodkvalite.com')
+
+    addNewsletter(db, "testletter1", "Lorem Ipsum Saga Baga Makakasao OKOK sss euueue Skrt skrt")
+    addNewsletter(db, "testletter Two", "Lsss aaaaa wwwwwwwww rrrrrrr tttttt yyyyyyyyyy ss euueue brrp brrap")
+
+    addNewsletterInfo(db, 1, 1)
+    addNewsletterInfo(db, 1, 2)
+    addNewsletterInfo(db, 1, 3)
+    addNewsletterInfo(db, 1, 4)
+    
+    addNewsletterInfo(db, 2, 1)
+    addNewsletterInfo(db, 2, 2)
+    addNewsletterInfo(db, 2, 3)
 
     addCat(db,  "Beverages",	"Soft drinks, coffees, teas, beers, and ales")        
     addCat(db,  "Condiments",	"Sweet and savory sauces, relishes, spreads, and seasonings")        
@@ -219,6 +236,38 @@ def addProduct(db,namn,supplierid, categoryid, quantityperunit,unitprice,unitsin
         cat.Products.append(c)
         db.session.commit()
 
+def addNewsletter(db, title, text):
+    letter = Newsletter.query.filter_by(title=title).first()
+
+    if letter == None:
+        l = Newsletter()
+        l.title = title
+        l.text = text
+
+        db.session.add(l)
+        db.session.commit()
+
+def addNewsletterInfo(db, letterId, receiverId):
+    info = db.session.query(NewsletterInfo).filter(NewsletterInfo.letterId==letterId).filter(NewsletterInfo.receiverId==receiverId).first()
+
+    if info == None:
+        i = NewsletterInfo()
+        i.letterId = letterId
+        i.receiverId = receiverId
+        db.session.add(i)
+        db.session.commit()
+
+
+def addNewsletterSignups(db, email):
+    signup = db.session.query(SignupsNewsletter).filter(SignupsNewsletter.email==email).first()
+
+    if signup == None:
+        i = SignupsNewsletter()
+        i.email = email
+        i.isActive = True
+
+        db.session.add(i)
+        db.session.commit()
 
 
 def addCat(db,namn,descr):
