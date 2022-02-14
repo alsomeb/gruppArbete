@@ -1,0 +1,19 @@
+{% extends "baseTemplate.html" %}
+{% from "_formHelpers.html" import render_field %}
+{% block title %} {{ title }} {% endblock %}
+{% block maincontent %}
+
+<div class="card" style="width:fit-content;">
+
+    <div class="card-header"> 
+        <h1> {{ newsletter.title }} </h1>
+        <a href="{{ url_for('newsletter.newsletter_edit', id = newsletter.id )}}" type="button" class="btn btn-outline-info btn-rounded">Edit <i type='solid' name='edit'></i> </a>
+    </div>
+
+    <p class="card-text">
+        {{ newsletter.text }}
+    </p>
+        
+</div>
+
+{% endblock %}
