@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, url_for, redirect, request
 from flask_user import roles_accepted, roles_required
 from areas.newsletter.forms import Newsletters
 from areas.newsletter.services import validate_EmailAddress
-from models import SignupsNewsletter, db
+from models import SignupsNewsletter, Newsletter, db
 from areas.newsletter.forms import EditNewsletter
 
 newsLetter = Blueprint('newsletter', __name__)
@@ -35,8 +35,7 @@ def signUpConfirm() -> str:
 def admin_Newsletter() -> str:
   title = "Newsletter Panel"
 
-  list_of_newsletters = []
-
+  list_of_newsletters = Newsletter.query.all()
 
   return render_template("newsletter/admin_newsletters.html", title=title)
 
@@ -45,10 +44,9 @@ def admin_Newsletter() -> str:
 def newsletter(id) -> str:
   title = "Newsletter Panel"
 
-  newsletter = '..'
+  newsletter = Newsletter.query.filter(Newsletter.id == id).first()
 
-
-  return render_template("newsletter/newsletter.html", title=title)
+  return render_template("newsletter/newsletter.html", title=title, newsletter=newsletter)
 
 
 @newsLetter.route('/admin/newsletter/<id>/edit')
@@ -56,12 +54,25 @@ def newsletter(id) -> str:
 def newsletter_edit(id) -> str:
   title = "Newsletter Panel"
 
-  newsletter = '..'
+  newsletter = Newsletter.query.filter(Newsletter.id == id).first()
 
   form = EditNewsletter(form.request)
 
-  
+  if request.method == 'GET':
 
+    form.title.data = newsletter.title
+    form.text.data = newsletter.text
+
+    return render_template('newsletter_edit.html', 
+        newsletter=newsletter, 
+        form=form)
+
+  if form.validate_on_submit():
+    newsletter.title = form.title.data
+    newsletter.text = form.text.data
+
+    #db.session.commit()
+    flash(f'Information updated for newsletter {newsletter.id}.', 'success')
 
   return render_template("newsletter/newsletter.html", title=title)
 
