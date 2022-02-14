@@ -1,5 +1,10 @@
 /env
 /__pycache__
+<<<<<<< HEAD
 areas/site/__pycache__/
 areas/products/__pycache__/
 migrations/__pycache__/
+=======
+config.py
+/config.py
+>>>>>>> 21f32a512e3d8bdc86b680ac7ac032833040c8fb
