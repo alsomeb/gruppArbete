@@ -63,9 +63,22 @@ class SignupsNewsletter(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     isActive = db.Column(db.Boolean(), nullable=False)
+    letters = db.relationship('NewsletterInfo', backref="SignupsNewsletter", lazy=True)
 
+class Newsletter(db.Model):
+    __tablename__= "Newsletter"
+    id = db.Column(db.Integer, primary_key=True)
+    text = db.Column(db.Text(50000), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    letters = db.relationship('NewsletterInfo', backref="Newsletter", lazy=True)
 
-
+class NewsletterInfo(db.Model):
+    __tablename__= "NewsletterInfo"
+    id = db.Column(db.Integer, primary_key=True)
+    dateSent = db.Column(db.DateTime, unique=False, nullable=False, default=datetime.utcnow)
+    letterId = db.Column(db.Integer, db.ForeignKey('Newsletter.id'), nullable=False)
+    receiverId = db.Column(db.Integer, db.ForeignKey('SignupsNewsletter.id'), nullable=False)
+    
 
 
 def seedData():
