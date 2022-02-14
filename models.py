@@ -86,7 +86,7 @@ def seedData():
     AddRoleIfNotExists("Customer")
     AddLoginIfNotExists("admin@example.com", "Hejsan123#",["Admin"])
     AddLoginIfNotExists("customer@example.com", "Hejsan123#",["Customer"])
-
+    
 
     #newsletter
     addNewsletterSignups(db, 'admin@example.com')
