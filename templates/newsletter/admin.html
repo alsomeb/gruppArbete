@@ -16,12 +16,14 @@
   <tbody>
     {% for SignupsNewsletter, NewsletterInfo in newsletters %}
     <tr>
-      <td>{{ SignupsNewsletter.email }}</td>
-      <td>{{ NewsletterInfo.dateSent }}</td>
+      <td><a href="#">{{ SignupsNewsletter.email }}</a></td>
+      <td><a href="#">{{ NewsletterInfo.dateSent }}</a></td>
     </tr>
     {% endfor %}
-  </tbody>
+    </tbody>
 </table>
+
+
 
 {% endblock %}
 
