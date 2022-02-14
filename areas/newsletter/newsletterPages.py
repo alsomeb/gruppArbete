@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, flash, url_for, redirect, request
 from flask_user import roles_accepted, roles_required
 from areas.newsletter.forms import Newsletters
 from areas.newsletter.services import validate_EmailAddress
-from models import SignupsNewsletter, db
+from models import SignupsNewsletter, db, Newsletter, NewsletterInfo
 from areas.newsletter.forms import EditNewsletter
 
 newsLetter = Blueprint('newsletter', __name__)
@@ -11,7 +11,8 @@ newsLetter = Blueprint('newsletter', __name__)
 @roles_required("Admin")
 def adminNewsletter() -> str:
   title = "Admin Panel"
-  return render_template("newsletter/admin.html", title=title)
+  newsletters = db.session.query(SignupsNewsletter, NewsletterInfo).join(NewsletterInfo).all()
+  return render_template("newsletter/admin.html", title=title, newsletters=newsletters)
 
 @newsLetter.route('/signUpConfirm', methods=["POST"])
 def signUpConfirm() -> str:
