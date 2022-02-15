@@ -17,10 +17,11 @@ def adminNewsletter() -> str:
 @newsLetter.route('/admin/newsletter/<id>', methods=["POST", "GET"])
 @roles_required("Admin")
 def listLettersById(id) -> str:
-  title = "Listing Letters By Id"
-  letters = db.session.query(Newsletter, NewsletterInfo, SignupsNewsletter).select_from(Newsletter).join(NewsletterInfo).join(SignupsNewsletter).filter(Newsletter.id==id).all()
   currentLetter = Newsletter.query.filter(id == id).first()
-  return render_template("newsletter/list_newsletter.html", title=title, letters=letters, currentLetter=currentLetter)
+  title = f"Showing letter {currentLetter.id}"
+  letters = db.session.query(Newsletter, NewsletterInfo, SignupsNewsletter).select_from(Newsletter).join(NewsletterInfo).join(SignupsNewsletter).filter(Newsletter.id==id).all()
+  newsLetterCount = db.session.query(Newsletter, NewsletterInfo).join(NewsletterInfo).filter(NewsletterInfo.letterId == id).count()
+  return render_template("newsletter/list_newsletter.html", title=title, letters=letters, currentLetter=currentLetter, newsLetterCount=newsLetterCount)
 
 @newsLetter.route('/signUpConfirm', methods=["POST"])
 def signUpConfirm() -> str:

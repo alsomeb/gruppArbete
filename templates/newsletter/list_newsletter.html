@@ -3,7 +3,10 @@
 {% block title %} {{ title }} {% endblock %}
 {% block maincontent %}
 <p>
-  Listar alla som hör till det nyhetsbrevet: <strong>{{ currentLetter.title }}</strong> med ID: <strong>{{ currentLetter.id }}</strong>
+  Listar alla som hör till det nyhetsbrevet: <strong>{{ currentLetter.title }}</strong> med <strong>ID: {{ currentLetter.id }}</strong>
+</p>
+<p>
+  Detta nyhetsbrevet har skickats ut <strong> {{ newsLetterCount }}</strong> gånger.
 </p>
 
 <table class="table">
