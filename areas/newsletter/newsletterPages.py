@@ -47,7 +47,7 @@ def admin_Newsletter() -> str:
 
   list_of_newsletters = Newsletter.query.all()
 
-  return render_template("newsletter/admin_newsletters.html", title=title)
+  return render_template("newsletter/admin_newsletters.html", title=title, list_of_newsletters=list_of_newsletters)
 
 @newsLetter.route('/admin/newsletter/<id>')
 @roles_required("Admin")
