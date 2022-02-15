@@ -12,6 +12,7 @@ newsLetter = Blueprint('newsletter', __name__)
 def adminNewsletter() -> str:
   title = "Admin Panel"
   newsletters = db.session.query(Newsletter).all()
+
   return render_template("newsletter/admin.html", title=title, newsletters=newsletters)
 
 @newsLetter.route('/admin/newsletter/<id>', methods=["POST", "GET"])
