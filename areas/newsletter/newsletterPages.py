@@ -11,10 +11,16 @@ newsLetter = Blueprint('newsletter', __name__)
 @roles_required("Admin")
 def adminNewsletter() -> str:
   title = "Admin Panel"
-
-  newsletters = db.session.query(SignupsNewsletter, NewsletterInfo).join(NewsletterInfo).all()
+  newsletters = db.session.query(Newsletter).all()
   return render_template("newsletter/admin.html", title=title, newsletters=newsletters)
 
+@newsLetter.route('/admin/newsletter/<id>', methods=["POST", "GET"])
+@roles_required("Admin")
+def listLettersById(id) -> str:
+  title = "Listing Letters By Id"
+  letters = db.session.query(Newsletter, NewsletterInfo, SignupsNewsletter).select_from(Newsletter).join(NewsletterInfo).join(SignupsNewsletter).filter(Newsletter.id==id).all()
+  currentLetter = Newsletter.query.filter(id == id).first()
+  return render_template("newsletter/list_newsletter.html", title=title, letters=letters, currentLetter=currentLetter)
 
 @newsLetter.route('/signUpConfirm', methods=["POST"])
 def signUpConfirm() -> str:

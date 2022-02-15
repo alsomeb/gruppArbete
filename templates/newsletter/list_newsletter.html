@@ -3,7 +3,7 @@
 {% block title %} {{ title }} {% endblock %}
 {% block maincontent %}
 <p>
-  Admin page
+  Listar alla som hör till det nyhetsbrevet: <strong>{{ currentLetter.title }}</strong> med ID: <strong>{{ currentLetter.id }}</strong>
 </p>
 
 <table class="table">
@@ -14,18 +14,18 @@
         Id</th>
       <th scope="col">
         <i class='bx bx-mail-send'></i>
-        Newsletter Text</th>
+        Email</th>
       <th scope="col">
-        <i class='bx bx-mail-send' ></i>
-        Newsletter Title</th>
+        <i class='bx bx-calendar-alt' ></i>
+        Date Sent</th>
     </tr>
   </thead>
   <tbody>
-    {% for letter in newsletters %}
+    {% for Newsletter, NewsletterInfo, SignupsNewsletter in letters %}
     <tr>
-      <td><strong>{{ letter.id }}</strong></td>
-      <td><a href="{{ url_for('newsletter.listLettersById', id=letter.id) }}">{{ letter.text }}</a></td>
-      <td>{{ letter.title }}</td>
+      <td><strong>{{ SignupsNewsletter.id }}</strong></td>
+      <td><a href="#">{{ SignupsNewsletter.email }}</a></td>
+      <td>{{ NewsletterInfo.dateSent }}</td>
     </tr>
     {% endfor %}
     </tbody>
