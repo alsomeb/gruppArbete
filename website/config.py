@@ -1,5 +1,5 @@
 class ConfigDebug():
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:Ahmad123.@localhost/gruppUppgift'    # File-based SQL database
+    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://root:sparven23@localhost/gruppUppgift'    # File-based SQL database
     SECRET_KEY = 'SDFA11#'
 
  # Flask-Mail SMTP server settings
@@ -7,13 +7,13 @@ class ConfigDebug():
     MAIL_PORT = 1025
     MAIL_USE_SSL = False
     MAIL_USE_TLS = False
-    MAIL_USERNAME = 'email@example.com'     
+    MAIL_USERNAME = 'email@steffe-shop.com'     
     MAIL_PASSWORD = 'password'
-    MAIL_DEFAULT_SENDER = '"MyApp" <noreply@example.com>'
+    MAIL_DEFAULT_SENDER = '"Steffe Shop" <noreply@steffe-shop.com>'
 
     # Flask-User settingsa
-    USER_APP_NAME = "Flask-User Basic App"      # Shown in and email templates and page footers
+    USER_APP_NAME = "Steffe Shop"      # Shown in and email templates and page footers
     USER_ENABLE_EMAIL = True        # Enable email aution
     USER_ENABLE_USERNAME = False    # Disable username authentication
     USER_EMAIL_SENDER_NAME = USER_APP_NAME
-    USER_EMAIL_SENDER_EMAIL = "noreply@example.com"    
+    USER_EMAIL_SENDER_EMAIL = "noreply@steffe-shop.com"    
