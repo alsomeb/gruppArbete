@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, flash, url_for, redirect, request
 from flask_user import roles_accepted, roles_required
-from website.areas.newsletter.forms import CreateNewsletter
-from website.areas.newsletter.services import validate_EmailAddress, sendMail
+from website.areas.newsletter.forms import CreateNewsletter, ChooseNewsletter
+from website.areas.newsletter.services import validate_EmailAddress, sendTestMail, sendNewsletters
 from website.models import SignupsNewsletter, Newsletter, db, NewsletterInfo
 from website.areas.newsletter.forms import EditNewsletter,CreateNewsletter
 
@@ -12,7 +12,7 @@ newsLetter = Blueprint('newsletter', __name__)
 def adminNewsletter() -> str:
   title = "Admin Panel"
   newsletters = db.session.query(Newsletter).all()
-  # sendMail() <-- finns i services, gör om den lite snyggare
+  # sendTestMail()
   return render_template("newsletter/admin.html", title=title, newsletters=newsletters)
 
 @newsLetter.route('/admin/newsletter/<id>', methods=["POST", "GET"])
@@ -109,3 +109,19 @@ def new_newsletter():
         return redirect(url_for('newsletter.adminNewsletter'))
 
     return render_template('newsletter/new_newsletter.html',form=form,title=title)
+
+
+@newsLetter.route("/admin/newsletter/send", methods=["GET", "POST"]) 
+@roles_required("Admin")
+def send_newsletter():
+    title = "Skicka Newsletter"
+    letters = Newsletter.query.all()
+    form = ChooseNewsletter(letters=letters)
+    if form.validate_on_submit():
+        letterTitle = form.selectLetter.data
+        getLetterObject = Newsletter.query.filter_by(title=letterTitle).first()
+        sendNewsletters(getLetterObject)
+        flash("Nyhetsbrev skickade till alla i databasen", "success")
+        return redirect(url_for('newsletter.adminNewsletter'))
+
+    return render_template('newsletter/send_newsletter.html',form=form,title=title)

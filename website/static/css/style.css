@@ -2271,12 +2271,12 @@ textarea.input {
 }
 
 .customThead {
-  background-color: #15161d;
-  color: white;
+  background-color: #dc3545;
+  color: black;
 }
 
 .customThead i {
-  color: #dc3545;
+  color: black;
 }
 
 .adminh3 {
@@ -2291,6 +2291,7 @@ textarea.input {
 
 .buttonCustom {
   margin-top: 20px;
+  border: 2px solid #15161D
 }
 
 .spaceBetween {
@@ -2301,7 +2302,7 @@ textarea.input {
   text-align: center;
   margin-top: 5px;
   text-decoration: underline;
-  color: white;
+  color: #15161D;
 }
 
 .card-header {
@@ -2311,14 +2312,34 @@ textarea.input {
 .newLetterButton {
   margin-bottom: 15px;
   transition: 0.3s ease-in-out;
+  color: black;
 }
 
 .newLetterButton:hover {
   transform: scale(1.1);
   margin-left: 10px;
+  border: 2px solid #15161D;
+  color: black;
+  background: linear-gradient(to top left, #dc3545, #15161d5b);
+  
 }
 
 .newLetterButton a {
-  color: white;
+  color: black;
   text-decoration: none;
+}
+
+.buttons button{
+  margin-left: 15px;
+  border: 2px solid #15161D;
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.help-block {
+  color: #dc3545;
+  font-weight: bold;
 }

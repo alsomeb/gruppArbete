@@ -6,11 +6,20 @@
   Välkommen till din Admin Dashboard
 </h3>
 
-<button type="button" class="btn btn-danger newLetterButton">
-  <a href="{{ url_for('newsletter.new_newsletter') }}">
-    <i class='bx bx-message-add'></i>
-    Nytt Nyhetsbrev</a>
-</button>
+<div class="buttons">
+  <button type="button" class="btn btn-danger newLetterButton">
+    <a href="{{ url_for('newsletter.new_newsletter') }}">
+      <i class='bx bx-message-add'></i>
+      Nytt Nyhetsbrev</a>
+  </button>
+
+  <button type="button" class="btn btn-danger newLetterButton">
+    <a href="{{ url_for('newsletter.send_newsletter') }}">
+      <i class='bx bx-mail-send'></i>
+      Skicka Nyhetsbrev</a>
+  </button>
+</div>
+
 
 <table class="table border border-secondary border-2">
   <thead class="customThead">
