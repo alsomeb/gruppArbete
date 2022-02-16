@@ -3,10 +3,10 @@
 {% block title %} {{ title }} {% endblock %}
 {% block maincontent %}
 
-<div class="card" style="width:fit-content;">
+<div class="card border border-secondary border-2">
 
     <div class="card-header"> 
-        <h1> {{ newsletter.title }} </h1>
+        <h3 class="h3newsLetter"> Skapa nytt newsletter </h3>
     </div>
 
     <div class="card-body">
@@ -14,11 +14,12 @@
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
 
-                {{ render_field(form.text) }}
                 {{ render_field(form.title) }}
+                <br/>
+                {{ render_field(form.text) }}
 
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info") }}
+                    {{ form.submit(class="btn btn-danger buttonCustom") }}
                 </div>
 
             </fieldset>

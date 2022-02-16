@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, flash, url_for, redirect, request
 from flask_user import roles_accepted, roles_required
-from website.areas.newsletter.forms import Newsletters
+from website.areas.newsletter.forms import CreateNewsletter
 from website.areas.newsletter.services import validate_EmailAddress, sendMail
 from website.models import SignupsNewsletter, Newsletter, db, NewsletterInfo
 from website.areas.newsletter.forms import EditNewsletter
@@ -18,8 +18,8 @@ def adminNewsletter() -> str:
 @newsLetter.route('/admin/newsletter/<id>', methods=["POST", "GET"])
 @roles_required("Admin")
 def listLettersById(id) -> str:
-  currentLetter = Newsletter.query.filter(id == id).first()
-  title = f"Showing letter {currentLetter.id}"
+  currentLetter = Newsletter.query.filter_by(id=id).first()
+  title = f"{currentLetter.title}"
   letters = db.session.query(Newsletter, NewsletterInfo, SignupsNewsletter).select_from(Newsletter).join(NewsletterInfo).join(SignupsNewsletter).filter(Newsletter.id==id).all()
   newsLetterCount = db.session.query(Newsletter, NewsletterInfo).join(NewsletterInfo).filter(NewsletterInfo.letterId == id).count()
   return render_template("newsletter/list_newsletter.html", title=title, letters=letters, currentLetter=currentLetter, newsLetterCount=newsLetterCount)
@@ -90,22 +90,22 @@ def newsletter_edit(id) -> str:
 
 
 
-@newsLetter.route("/new_newsleeter", methods=["GET", "POST"]) 
+@newsLetter.route("/admin/newsletter/add", methods=["GET", "POST"]) 
 @roles_required("Admin")
-def new_newsleeter():
+def new_newsletter():
     title = "Newsletter Panel"
     form = CreateNewsletter(request.form) 
 
     if request.method == "GET":
-        return render_template('newsletter/new_newsleeter.html',form=form)
+        return render_template('newsletter/new_newsletter.html',form=form, title=title)
 
     if form.validate_on_submit():
-        newsletterfronDB = Newsletters()
-        newsletterfronDB.text = form.text.data
-        newsletterfronDB.title = form.title.data 
-        db.session.add(newsletterfronDB)
+        newsletterfromDB = Newsletter()
+        newsletterfromDB.text = form.text.data
+        newsletterfromDB.title = form.title.data 
+        db.session.add(newsletterfromDB)
         db.session.commit()
-        flash(f'Information saved for newsletter', 'success')
-        return redirect(url_for('newsletter.new_newsleeter'))
+        flash(f'Nytt välkomstbrev skapat med titel {newsletterfromDB.title}', 'success')
+        return redirect(url_for('newsletter.adminNewsletter'))
 
-    return render_template('newsletter/new_newsleeter.html',form=form,title=title)
+    return render_template('newsletter/new_newsletter.html',form=form,title=title)

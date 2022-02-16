@@ -24,14 +24,10 @@ class EditNewsletter(FlaskForm):
     submit = SubmitField('Save changes')
 
 
-
-
-
-
 class CreateNewsletter(FlaskForm):
-    text = StringField("Text", [validators.Length(min=1, max=10000)])
-    title = StringField('Title', [validators.Length(min=1, max=255)], widget=TextArea())
-    submit = SubmitField('Save changes')
+    title = StringField("Titel", [validators.Length(min=1, max=225), validators.DataRequired()])
+    text = StringField('Text', [validators.Length(min=1, max=10000), validators.DataRequired()], widget=TextArea(), render_kw={"rows":10, "cols":50})
+    submit = SubmitField('Lägg till nytt newsletter')
 
 
 

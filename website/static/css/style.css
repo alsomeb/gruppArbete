@@ -412,7 +412,7 @@ textarea.input {
 
 #top-header {
   padding-top: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
   background-color: #1E1F29;
 }
 
@@ -2268,4 +2268,57 @@ textarea.input {
   justify-content: center;
   align-items: center;
   margin: 50px 0;
+}
+
+.customThead {
+  background-color: #15161d;
+  color: white;
+}
+
+.customThead i {
+  color: #dc3545;
+}
+
+.adminh3 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.loggedInWith {
+  color: #dc3545;
+  margin-right: 50px
+}
+
+.buttonCustom {
+  margin-top: 20px;
+}
+
+.spaceBetween {
+  margin-top: 20px;
+}
+
+.h3newsLetter {
+  text-align: center;
+  margin-top: 5px;
+  text-decoration: underline;
+  color: white;
+}
+
+.card-header {
+  background-color: #dc3545;
+}
+
+.newLetterButton {
+  margin-bottom: 15px;
+  transition: 0.3s ease-in-out;
+}
+
+.newLetterButton:hover {
+  transform: scale(1.1);
+  margin-left: 10px;
+}
+
+.newLetterButton a {
+  color: white;
+  text-decoration: none;
 }
