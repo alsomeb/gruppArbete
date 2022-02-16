@@ -31,7 +31,7 @@ class EditNewsletter(FlaskForm):
 class CreateNewsletter(FlaskForm):
     text = StringField("Text", [validators.Length(min=1, max=10000)])
     title = StringField('Title', [validators.Length(min=1, max=255)], widget=TextArea())
-    submit = SubmitField('Save changes')
+    submit = SubmitField('Save')
 
 
 

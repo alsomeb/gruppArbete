@@ -3,7 +3,7 @@ from flask_user import roles_accepted, roles_required
 from website.areas.newsletter.forms import Newsletters
 from website.areas.newsletter.services import validate_EmailAddress, sendMail
 from website.models import SignupsNewsletter, Newsletter, db, NewsletterInfo
-from website.areas.newsletter.forms import EditNewsletter
+from website.areas.newsletter.forms import EditNewsletter,CreateNewsletter
 
 newsLetter = Blueprint('newsletter', __name__)
 
@@ -108,4 +108,4 @@ def new_newsleeter():
         flash(f'Information saved for newsletter', 'success')
         return redirect(url_for('newsletter.new_newsleeter'))
 
-    return render_template('newsletter/new_newsleeter.html',form=form,title=title)
+    return render_template('newsletter/new_newsleeter.html',form=form,)
