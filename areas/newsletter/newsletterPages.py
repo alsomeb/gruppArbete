@@ -3,7 +3,7 @@ from flask_user import roles_accepted, roles_required
 from areas.newsletter.forms import Newsletters
 from areas.newsletter.services import validate_EmailAddress
 from models import SignupsNewsletter, Newsletter, db, NewsletterInfo
-from areas.newsletter.forms import EditNewsletter
+from areas.newsletter.forms import EditNewsletter,CreateNewsletter
 
 newsLetter = Blueprint('newsletter', __name__)
 
@@ -86,3 +86,25 @@ def newsletter_edit(id) -> str:
 
   return render_template("newsletter/newsletter.html", title=title)
 
+
+
+
+@newsLetter.route("/new_newsleeter", methods=["GET", "POST"]) 
+@roles_required("Admin")
+def new_newsleeter():
+    title = "Newsletter Panel"
+    form = CreateNewsletter(request.form) 
+
+    if request.method == "GET":
+        return render_template('newsletter/new_newsleeter.html',form=form)
+
+    if form.validate_on_submit():
+        newsletterfronDB = Newsletters()
+        newsletterfronDB.text = form.text.data
+        newsletterfronDB.title = form.title.data 
+        db.session.add(newsletterfronDB)
+        db.session.commit()
+        flash(f'Information saved for newsletter', 'success')
+        return redirect(url_for('newsletter.new_newsleeter'))
+
+    return render_template('newsletter/new_newsleeter.html',form=form,title=title)
