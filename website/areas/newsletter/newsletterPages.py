@@ -3,7 +3,7 @@ from flask_user import roles_accepted, roles_required
 from website.areas.newsletter.forms import CreateNewsletter
 from website.areas.newsletter.services import validate_EmailAddress, sendMail
 from website.models import SignupsNewsletter, Newsletter, db, NewsletterInfo
-from website.areas.newsletter.forms import EditNewsletter
+from website.areas.newsletter.forms import EditNewsletter,CreateNewsletter
 
 newsLetter = Blueprint('newsletter', __name__)
 
