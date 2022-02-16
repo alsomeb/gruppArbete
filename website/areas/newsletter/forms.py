@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import Form, validators,SelectField,FloatField,StringField,ValidationError
 from wtforms.fields import IntegerField, SubmitField
-from models import SignupsNewsletter
+from website.models import SignupsNewsletter
 from wtforms.widgets import TextArea
 
 

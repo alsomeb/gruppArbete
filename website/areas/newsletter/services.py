@@ -1,4 +1,4 @@
-from models import SignupsNewsletter
+from website.models import SignupsNewsletter
 
 def validate_EmailAddress(EmailAddress):
   customer = SignupsNewsletter.query.filter_by(email=EmailAddress).first()

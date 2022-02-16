@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from .services import getCategory, getTrendingCategories, getProduct, getTrendingProducts
 from flask_user import roles_accepted, roles_required, current_user
-from areas.newsletter.forms import Newsletters
+from website.areas.newsletter.forms import Newsletters
 
 
 productBluePrint = Blueprint('product', __name__)

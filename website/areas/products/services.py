@@ -1,4 +1,4 @@
-from models import Category, Product
+from website.models import Category, Product
 
 def getTrendingCategories():
     return Category.query.order_by(Category.CategoryID.desc()).paginate(1,4,False).items
