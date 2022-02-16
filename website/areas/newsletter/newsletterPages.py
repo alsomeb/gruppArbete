@@ -1,9 +1,16 @@
 from flask import Blueprint, render_template, flash, url_for, redirect, request
 from flask_user import roles_accepted, roles_required
+<<<<<<< HEAD
+from areas.newsletter.forms import Newsletters
+from areas.newsletter.services import validate_EmailAddress
+from models import SignupsNewsletter, Newsletter, db, NewsletterInfo
+from areas.newsletter.forms import EditNewsletter,CreateNewsletter
+=======
 from website.areas.newsletter.forms import Newsletters
 from website.areas.newsletter.services import validate_EmailAddress
 from website.models import SignupsNewsletter, Newsletter, db, NewsletterInfo
 from website.areas.newsletter.forms import EditNewsletter
+>>>>>>> 82675c2c17ce3f7790f7438c6db95244391f10db
 
 newsLetter = Blueprint('newsletter', __name__)
 
