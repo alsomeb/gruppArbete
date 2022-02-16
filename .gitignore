@@ -3,3 +3,16 @@
 areas/site/__pycache__/
 areas/products/__pycache__/
 migrations/__pycache__/
+website/config.py
+website/__pycache__/__init__.cpython-310.pyc
+website/__pycache__/config.cpython-310.pyc
+website/__pycache__/models.cpython-310.pyc
+website/areas/newsletter/__pycache__/__init__.cpython-310.pyc
+website/areas/newsletter/__pycache__/forms.cpython-310.pyc
+website/areas/newsletter/__pycache__/newsletterPages.cpython-310.pyc
+website/areas/newsletter/__pycache__/services.cpython-310.pyc
+website/areas/products/__pycache__/__init__.cpython-310.pyc
+website/areas/products/__pycache__/productPages.cpython-310.pyc
+.gitignore
+website/areas/site/__pycache__/__init__.cpython-310.pyc
+website/areas/site/__pycache__/sitePages.cpython-310.pyc
