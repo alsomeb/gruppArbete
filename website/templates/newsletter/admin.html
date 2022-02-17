@@ -38,9 +38,20 @@
   <tbody>
     {% for letter in newsletters %}
     <tr>
-      <td><strong>{{ letter.id }}</strong></td>
-      <td><a href="{{ url_for('newsletter.listLettersById', id=letter.id) }}">{{ letter.text }}</a></td>
-      <td>{{ letter.title }}</td>
+      <td>
+        <div class="letterId">
+        <button type="button" class="btn btn-danger newLetterButton">
+          <a href="#">
+            <i class="bi bi-pencil-square"></i>
+            Edit</a>
+        </button>
+          <p>
+            {{ letter.id }}
+          </p>
+        </div>
+      </td>
+      <td><a href="{{ url_for('newsletter.listLettersById', id=letter.id) }}"><strong>{{ letter.text }}</strong></a></td>
+      <td><strong>{{ letter.title }}</strong></td>
     </tr>
     {% endfor %}
     </tbody>

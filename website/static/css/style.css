@@ -2270,6 +2270,7 @@ textarea.input {
   margin: 50px 0;
 }
 
+
 .customThead {
   background-color: #dc3545;
   color: black;
@@ -2341,5 +2342,15 @@ textarea.input {
 
 .help-block {
   color: #dc3545;
+  font-weight: bold;
+}
+
+.letterId {
+  display: inline-flex;
+  margin-top: 7px;
+}
+
+.letterId p {
+  margin-left: 10px;
   font-weight: bold;
 }
