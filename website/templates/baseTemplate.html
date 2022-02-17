@@ -45,7 +45,7 @@
                         <i class='bx bx-log-out' ></i>
                         Logout</a></li>
                     {% if current_user.has_roles("Admin") %}
-                    <li><a href="{{ url_for('newsletter.adminNewsletter') }}">
+                    <li><a href="{{ url_for('newsletter.adminIndex') }}">
                         <i class='bx bxs-dashboard'></i>
                         Admin</a></li>
                     {% endif %}

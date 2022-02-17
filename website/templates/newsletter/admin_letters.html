@@ -1,0 +1,63 @@
+{% extends "baseTemplate.html" %}
+{% from "_formHelpers.html" import render_field %}
+{% block title %} {{ title }} {% endblock %}
+{% block maincontent %}
+<h3 class="adminh3">
+  Administrera Newsletters
+</h3>
+
+<div class="buttons">
+  <button type="button" class="btn btn-danger newLetterButton">
+    <a href="{{ url_for('newsletter.new_newsletter') }}">
+      <i class='bx bx-message-add'></i>
+      Nytt Nyhetsbrev</a>
+  </button>
+
+  <button type="button" class="btn btn-danger newLetterButton">
+    <a href="{{ url_for('newsletter.send_newsletter') }}">
+      <i class='bx bx-mail-send'></i>
+      Skicka Nyhetsbrev</a>
+  </button>
+</div>
+
+
+<table class="table border border-secondary border-2">
+  <thead class="customThead">
+    <tr>
+      <th scope="col">
+        <i class="bi bi-123"></i>
+        Id</th>
+      <th scope="col">
+        <i class="bi bi-body-text"></i>
+        Newsletter Text</th>
+      <th scope="col">
+        <i class="bi bi-card-text"></i>
+        Newsletter Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for letter in newsletters %}
+    <tr>
+      <td>
+        <div class="letterId">
+        <button type="button" class="btn btn-danger newLetterButton">
+          <a href="#">
+            <i class="bi bi-pencil-square"></i>
+            Edit</a>
+        </button>
+          <p>
+            {{ letter.id }}
+          </p>
+        </div>
+      </td>
+      <td><a href="{{ url_for('newsletter.listLettersById', id=letter.id) }}"><strong>{{ letter.text }}</strong></a></td>
+      <td><strong>{{ letter.title }}</strong></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}
+

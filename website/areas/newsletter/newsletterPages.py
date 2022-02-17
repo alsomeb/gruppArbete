@@ -9,11 +9,17 @@ newsLetter = Blueprint('newsletter', __name__)
 
 @newsLetter.route('/admin')
 @roles_required("Admin")
+def adminIndex() -> str:
+  title = "Admin Index"
+  return render_template("newsletter/admin.html", title=title)
+
+@newsLetter.route('/admin/letters')
+@roles_required("Admin")
 def adminNewsletter() -> str:
-  title = "Admin Panel"
+  title = "Newsletters"
   newsletters = db.session.query(Newsletter).all()
   # sendTestMail()
-  return render_template("newsletter/admin.html", title=title, newsletters=newsletters)
+  return render_template("newsletter/admin_letters.html", title=title, newsletters=newsletters)
 
 @newsLetter.route('/admin/newsletter/<id>', methods=["POST", "GET"])
 @roles_required("Admin")
