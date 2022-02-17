@@ -18,11 +18,6 @@ class Newsletters(FlaskForm):
                 raise ValidationError('Email Already Exist')
 
 
-class EditNewsletter(FlaskForm):
-    title = StringField("title", [validators.Length(min=1, max=255)])
-    text = StringField('Text', [validators.Length(min=1, max=10000)], widget=TextArea())
-    submit = SubmitField('Save changes')
-
 
 class CreateNewsletter(FlaskForm):
     title = StringField("Titel", [validators.Length(min=1, max=225), validators.DataRequired()])
@@ -33,6 +28,9 @@ class CreateNewsletter(FlaskForm):
         letter = Newsletter.query.filter_by(title=title.data).first()
         if letter:
             raise ValidationError('Letter Title Already exists, choose another one...')
+
+class EditNewsletter(CreateNewsletter):
+    submit = SubmitField('Save changes')
 
 class ChooseNewsletter(FlaskForm):
     selectLetter = SelectField("Välj Nyhetsbrev", [validators.DataRequired()], choices=[])
