@@ -23,8 +23,43 @@
   Välkommen till din Admin Dashboard
 </h3>
 
-<p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, alias nobis a quaerat quas quia consequatur explicabo maxime sed odio repellendus? Similique ullam accusantium consequatur repellendus autem eos aliquid iste ratione dolorem ex, numquam soluta quisquam odio eveniet maxime molestiae rem quam possimus voluptatem laudantium? Ab, animi eius repudiandae repellat iure quo! Quod expedita a similique perspiciatis culpa? Natus maiores consectetur fugit officiis aut iure libero, praesentium dolorem optio quod recusandae repellat totam architecto, eius eos delectus. Doloribus at eius omnis illo nesciunt dicta asperiores aperiam commodi placeat soluta autem aut eveniet deserunt ea sequi, enim, et nulla velit fugiat.
-</p>
+<div class="javascriptLove">
+</div>
+<br/>
+<div class="lorem">
+</div>
+
+<script>
+  "use strict";
+
+  const generateLoremList = function(string){
+    let loremText = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut pariatur eos voluptates expedita veniam deleniti, error exercitationem quia quidem dolore doloremque delectus aperiam voluptas in quibusdam non quasi omnis natus, veritatis perspiciatis enim saepe beatae. Odit voluptates tempore voluptate odio ipsum similique dolor labore accusantium ratione modi veniam, magnam libero nobis ea suscipit quis quos, tenetur aliquid molestias architecto? Necessitatibus voluptatem doloribus iure, nisi, dignissimos earum perspiciatis et error nesciunt a iusto quasi dolores aut voluptatibus in quae aspernatur! Et error voluptate adipisci minus fugit dolorum cumque autem molestias vitae perferendis temporibus delectus atque quisquam dolore ducimus aliquam, asperiores esse?"
+    const loremList = loremText.split(" ");
+    return loremList
+  }
+
+  const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+
+  const skapaText = async function(arr) {
+    javascriptLove();
+
+    for(let i = 0; i < arr.length; i++){
+      document.querySelector(".lorem").textContent += arr[i] + " ";
+      await sleep(20);
+    }
+  }
+
+  const javascriptLove = function() {
+    const addDiv = document.querySelector(".javascriptLove").textContent = 'Welcome to the team champ! 🎉';
+  }
+
+  const loremList = generateLoremList();
+  // console.log(loremList);
+  skapaText(loremList);
+
+
+</script>
 
 {% endblock %}
