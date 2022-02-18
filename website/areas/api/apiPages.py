@@ -23,3 +23,5 @@ def subscribe(email:str):
 @apiBluePrint.route("/api/time")
 def showCurrentTime()->datetime:
   return {"Current Time Right Now":datetime.utcnow()}
+
+
