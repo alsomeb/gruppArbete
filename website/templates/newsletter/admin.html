@@ -2,62 +2,29 @@
 {% from "_formHelpers.html" import render_field %}
 {% block title %} {{ title }} {% endblock %}
 {% block maincontent %}
+<nav>
+  <div class="buttons">
+    <button type="button" class="btn btn-danger newLetterButton">
+      <a href="{{ url_for('newsletter.adminNewsletter') }}">
+        <i class='bx bx-message-add'></i>
+        Newsletters</a>
+    </button>
+  
+    <button type="button" class="btn btn-danger newLetterButton">
+      <a href="##">
+        <i class="bi bi-basket"></i>
+        Products</a>
+    </button>
+  </div>
+</nav>
+<br/>
+<br/>
 <h3 class="adminh3">
   Välkommen till din Admin Dashboard
 </h3>
 
-<div class="buttons">
-  <button type="button" class="btn btn-danger newLetterButton">
-    <a href="{{ url_for('newsletter.new_newsletter') }}">
-      <i class='bx bx-message-add'></i>
-      Nytt Nyhetsbrev</a>
-  </button>
-
-  <button type="button" class="btn btn-danger newLetterButton">
-    <a href="{{ url_for('newsletter.send_newsletter') }}">
-      <i class='bx bx-mail-send'></i>
-      Skicka Nyhetsbrev</a>
-  </button>
-</div>
-
-
-<table class="table border border-secondary border-2">
-  <thead class="customThead">
-    <tr>
-      <th scope="col">
-        <i class="bi bi-123"></i>
-        Id</th>
-      <th scope="col">
-        <i class="bi bi-body-text"></i>
-        Newsletter Text</th>
-      <th scope="col">
-        <i class="bi bi-card-text"></i>
-        Newsletter Title</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for letter in newsletters %}
-    <tr>
-      <td>
-        <div class="letterId">
-        <button type="button" class="btn btn-danger newLetterButton">
-          <a href="#">
-            <i class="bi bi-pencil-square"></i>
-            Edit</a>
-        </button>
-          <p>
-            {{ letter.id }}
-          </p>
-        </div>
-      </td>
-      <td><a href="{{ url_for('newsletter.listLettersById', id=letter.id) }}"><strong>{{ letter.text }}</strong></a></td>
-      <td><strong>{{ letter.title }}</strong></td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
-
+<p>
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, alias nobis a quaerat quas quia consequatur explicabo maxime sed odio repellendus? Similique ullam accusantium consequatur repellendus autem eos aliquid iste ratione dolorem ex, numquam soluta quisquam odio eveniet maxime molestiae rem quam possimus voluptatem laudantium? Ab, animi eius repudiandae repellat iure quo! Quod expedita a similique perspiciatis culpa? Natus maiores consectetur fugit officiis aut iure libero, praesentium dolorem optio quod recusandae repellat totam architecto, eius eos delectus. Doloribus at eius omnis illo nesciunt dicta asperiores aperiam commodi placeat soluta autem aut eveniet deserunt ea sequi, enim, et nulla velit fugiat.
+</p>
 
 {% endblock %}
-
