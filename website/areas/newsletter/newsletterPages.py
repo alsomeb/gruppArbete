@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, render_template, flash, url_for, redirect, request
 from flask_user import roles_accepted, roles_required
 from website.areas.newsletter.forms import CreateNewsletter, ChooseNewsletter
@@ -34,12 +35,23 @@ def listLettersById(id) -> str:
 def signUpConfirm() -> str:
   title = "Thank You"
   email = request.form.get('email')
+  if email == "" or email == None:
+    flash("Enter email","danger")
+    return redirect(url_for('product.index'))
   result = validate_EmailAddress(email)
   if result == False:
     addLetter = SignupsNewsletter()
     addLetter.email = email
     addLetter.isActive = True
     db.session.add(addLetter)
+    db.session.commit()
+    # Varje Newsletter sub blir auto assignad till Newsletter 1
+    getSub = SignupsNewsletter.query.filter_by(email=email).first()
+    letter = NewsletterInfo()
+    letter.dateSent = datetime.utcnow()
+    letter.letterId = 1
+    letter.receiverId = getSub.id
+    db.session.add(letter)
     db.session.commit()
     flash(f'{addLetter.email} was added to newsletters', 'success')
   if result == True:
@@ -92,7 +104,7 @@ def newsletter_edit(id) -> str:
     
     flash(f'Information updated for newsletter {newsletter.id}.', 'success')
     return redirect(url_for('newsletter.adminNewsletter'))
-    
+
   return render_template('newsletter/newsletter_edit.html', 
         newsletter=newsletter, 
         form=form)
