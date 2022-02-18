@@ -82,8 +82,8 @@ def newsletter_edit(id) -> str:
     print('success')
     newsletter.title = form.title.data
     newsletter.text = form.text.data
-
-    #db.session.commit()
+    db.session.commit()
+    
     flash(f'Information updated for newsletter {newsletter.id}.', 'success')
 
   return redirect(url_for('newsletter.newsletter', id=id))
