@@ -2314,6 +2314,7 @@ textarea.input {
   margin-bottom: 15px;
   transition: 0.3s ease-in-out;
   color: black;
+  border: 2px solid #15161D;
 }
 
 .newLetterButton:hover {
@@ -2357,5 +2358,17 @@ textarea.input {
 
 .javascriptLove {
   font-weight: bold;
-  font-size: 25;
+  font-size: 20px;
+  text-align: center;
+}
+
+/* animation */
+@keyframes animation {
+  from {color: black;}
+  to {color: #D10024}
+}
+
+.javascriptLove{
+  animation-name: animation;
+  animation-duration: 5s;
 }

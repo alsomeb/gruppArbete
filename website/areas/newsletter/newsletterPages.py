@@ -81,11 +81,11 @@ def newsletter(id) -> str:
 @newsLetter.route('/admin/newsletter/<id>/edit', methods = ["GET", "POST"])
 @roles_required("Admin")
 def newsletter_edit(id) -> str:
-  title = "Newsletter Panel"
+  title = "Edit Newsletter"
 
   newsletter = Newsletter.query.filter(Newsletter.id == id).first()
 
-  form = EditNewsletter(request.form, current_letter=str(newsletter.id))
+  form = EditNewsletter(request.form, current_letter=str(newsletter.id)) # skickar in ID på current letter
 
   if request.method == 'GET':
 
@@ -94,7 +94,7 @@ def newsletter_edit(id) -> str:
 
     return render_template('newsletter/newsletter_edit.html', 
         newsletter=newsletter, 
-        form=form)
+        form=form, title=title)
 
   if form.validate_on_submit():
     print('success')
@@ -107,7 +107,7 @@ def newsletter_edit(id) -> str:
 
   return render_template('newsletter/newsletter_edit.html', 
         newsletter=newsletter, 
-        form=form)
+        form=form,title=title)
 
 
 @newsLetter.route("/admin/newsletter/add", methods=["GET", "POST"]) 
