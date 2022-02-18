@@ -20,10 +20,12 @@ def create_app():
   from website.areas.newsletter.newsletterPages import newsLetter
   from website.areas.products.productPages import productBluePrint
   from website.areas.site.sitePages import siteBluePrint
+  from website.areas.api.apiPages import apiBluePrint
 
   app.register_blueprint(siteBluePrint)
   app.register_blueprint(productBluePrint)
   app.register_blueprint(newsLetter)
+  app.register_blueprint(apiBluePrint)
 
   if migrate:
     return app, migrate
