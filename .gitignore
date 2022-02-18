@@ -17,7 +17,8 @@ website/areas/products/__pycache__/productPages.cpython-310.pyc
 website/areas/site/__pycache__/__init__.cpython-310.pyc
 website/areas/site/__pycache__/sitePages.cpython-310.pyc
 website/areas/newsletter/__pycache__/newsletterPages.cpython-310.pyc
-website/config.py
+
 website/__pycache__/config.cpython-39.pyc
 website/areas/api/__pycache__/serverices.cpython-39.pyc
 
+website/config.py
