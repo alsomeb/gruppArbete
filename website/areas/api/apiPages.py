@@ -38,3 +38,18 @@ def listSubscribers():
     sub = _mapSubscriberToApi(subscriber)
     subscribersList.append(sub)
   return jsonify([sub.__dict__ for sub in subscribersList])
+
+
+@apiBluePrint.route("/api/newsletter/unsubscribe/<email>")
+def unsubscribe(email):
+
+  subscriber:SignupsNewsletter = SignupsNewsletter.query.filter_by(email=email).first()
+
+  if subscriber == None:
+    return {email:"is not subscribed"}
+
+  if subscriber.isActive:
+    subscriber.isActive = False
+    db.session.commit()
+    return{email:"unsubscribe lyckdes"}
+  return{email:"is not subscribed"}  
