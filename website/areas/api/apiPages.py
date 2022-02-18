@@ -10,14 +10,15 @@ apiBluePrint = Blueprint('api', __name__)
 @apiBluePrint.route("/api/newsletter/subscribe/<email>")
 def subscribe(email:str):
   searchMail =  searchEmail(email)
-  if searchMail:
-    return {searchMail.email:"Subscribed Already"} # Dict already Json format 
-  subMail = SignupsNewsletter()
-  subMail.email = email
-  subMail.isActive = True
-  db.session.add(subMail)
-  db.session.commit()
-  return {"200":subMail.email}
+
+  if searchMail.isActive == False:
+    subMail = SignupsNewsletter()
+    subMail.email = email
+    subMail.isActive = True
+    db.session.add(subMail)
+    db.session.commit()
+    return {"200":subMail.email}
+  return {searchMail.email:"Subscribed Already"} # Dict already Json format 
 
 
 @apiBluePrint.route("/api/time")
