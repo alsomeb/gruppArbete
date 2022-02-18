@@ -8,4 +8,4 @@ if __name__  == "__main__":
     with app.app_context():
         upgrade()
         seedData()
-    app.run(debug=True)
+    app.run()
