@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import Form, validators,SelectField,FloatField,StringField,ValidationError
+from wtforms import Form, validators,SelectField,FloatField,StringField,ValidationError, HiddenField
 from wtforms.fields import IntegerField, SubmitField
 from website.models import SignupsNewsletter, Newsletter
 from wtforms.widgets import TextArea
@@ -11,20 +11,11 @@ class Newsletters(FlaskForm):
     def validate_EmailAddress(self, email):
         user = SignupsNewsletter.query.filter_by(email=email.data).first()
         if user:
-            currentEmail = user.email
-            if email.data == currentEmail:
-                return email.data
-            else:
-                raise ValidationError('Email Already Exist')
-
-
-class EditNewsletter(FlaskForm):
-    title = StringField("title", [validators.Length(min=1, max=255)])
-    text = StringField('Text', [validators.Length(min=1, max=10000)], widget=TextArea())
-    submit = SubmitField('Save changes')
+            raise ValidationError('Email Already Exist')
 
 
 class CreateNewsletter(FlaskForm):
+    current_letter = HiddenField()
     title = StringField("Titel", [validators.Length(min=1, max=225), validators.DataRequired()])
     text = StringField('Text', [validators.Length(min=1, max=10000), validators.DataRequired()], widget=TextArea(), render_kw={"rows":10, "cols":50})
     submit = SubmitField('Lägg till nytt newsletter')
@@ -32,6 +23,18 @@ class CreateNewsletter(FlaskForm):
     def validate_title(self, title):
         letter = Newsletter.query.filter_by(title=title.data).first()
         if letter:
+            raise ValidationError('Letter Title Already exists, choose another one...')
+
+class EditNewsletter(CreateNewsletter): ## ärver av CreateNewsletter
+    current_letter = HiddenField()
+    submit = SubmitField('Save changes')
+
+    def validate_title(self, title):
+        letter = Newsletter.query.filter_by(title=title.data).first()
+        if letter:
+            # if letter title is taken by the user itself its fine
+            if letter.id == int(self.current_letter.data):
+                return
             raise ValidationError('Letter Title Already exists, choose another one...')
 
 class ChooseNewsletter(FlaskForm):

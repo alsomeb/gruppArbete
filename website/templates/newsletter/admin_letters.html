@@ -41,7 +41,7 @@
       <td>
         <div class="letterId">
         <button type="button" class="btn btn-danger newLetterButton">
-          <a href="#">
+          <a href="{{ url_for('newsletter.newsletter_edit', id=letter.id) }}">
             <i class="bi bi-pencil-square"></i>
             Edit</a>
         </button>

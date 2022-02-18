@@ -66,34 +66,36 @@ def newsletter(id) -> str:
   return render_template("newsletter/newsletter.html", title=title, newsletter=newsletter)
 
 
-@newsLetter.route('/admin/newsletter/<id>/edit')
+@newsLetter.route('/admin/newsletter/<id>/edit', methods = ["GET", "POST"])
 @roles_required("Admin")
 def newsletter_edit(id) -> str:
   title = "Newsletter Panel"
 
   newsletter = Newsletter.query.filter(Newsletter.id == id).first()
 
-  form = EditNewsletter(form.request)
+  form = EditNewsletter(request.form, current_letter=str(newsletter.id))
 
   if request.method == 'GET':
 
     form.title.data = newsletter.title
     form.text.data = newsletter.text
 
-    return render_template('newsletter_edit.html', 
+    return render_template('newsletter/newsletter_edit.html', 
         newsletter=newsletter, 
         form=form)
 
   if form.validate_on_submit():
+    print('success')
     newsletter.title = form.title.data
     newsletter.text = form.text.data
-
-    #db.session.commit()
+    db.session.commit()
+    
     flash(f'Information updated for newsletter {newsletter.id}.', 'success')
-
-  return render_template("newsletter/newsletter.html", title=title)
-
-
+    return redirect(url_for('newsletter.adminNewsletter'))
+    
+  return render_template('newsletter/newsletter_edit.html', 
+        newsletter=newsletter, 
+        form=form)
 
 
 @newsLetter.route("/admin/newsletter/add", methods=["GET", "POST"]) 
