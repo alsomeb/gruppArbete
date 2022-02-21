@@ -8,6 +8,22 @@ from website.areas.newsletter.forms import EditNewsletter,CreateNewsletter
 
 newsLetter = Blueprint('newsletter', __name__)
 
+
+@newsLetter.route('/admin/newsletter/delete/<id>', methods=["POST", "GET"])
+@roles_required("Admin")
+def deleteLetterById(id):
+  getLetter = Newsletter.query.filter_by(id=id).first()
+  flash(f"Letter Id: {getLetter.id} with Title: {getLetter.title} deleted","danger")
+
+  # Deleted Receivers from assos. table
+  receivers = db.session.query(NewsletterInfo).filter(NewsletterInfo.letterId == id).delete()
+  db.session.commit()
+
+  # Removing the LetterById
+  letter = db.session.query(Newsletter).filter(Newsletter.id==id).delete()
+  db.session.commit()
+  return redirect(url_for('newsletter.adminNewsletter'))
+
 @newsLetter.route('/admin')
 @roles_required("Admin")
 def adminIndex() -> str:
@@ -19,7 +35,6 @@ def adminIndex() -> str:
 def adminNewsletter() -> str:
   title = "Newsletters"
   newsletters = db.session.query(Newsletter).all()
-  # sendTestMail()
   return render_template("newsletter/admin_letters.html", title=title, newsletters=newsletters)
 
 @newsLetter.route('/admin/newsletter/<id>', methods=["POST", "GET"])
@@ -81,11 +96,11 @@ def newsletter(id) -> str:
 @newsLetter.route('/admin/newsletter/<id>/edit', methods = ["GET", "POST"])
 @roles_required("Admin")
 def newsletter_edit(id) -> str:
-  title = "Newsletter Panel"
+  title = "Edit Newsletter"
 
   newsletter = Newsletter.query.filter(Newsletter.id == id).first()
 
-  form = EditNewsletter(request.form, current_letter=str(newsletter.id))
+  form = EditNewsletter(request.form, current_letter=str(newsletter.id)) # skickar in ID på current letter
 
   if request.method == 'GET':
 
@@ -94,7 +109,7 @@ def newsletter_edit(id) -> str:
 
     return render_template('newsletter/newsletter_edit.html', 
         newsletter=newsletter, 
-        form=form)
+        form=form, title=title)
 
   if form.validate_on_submit():
     print('success')
@@ -107,7 +122,7 @@ def newsletter_edit(id) -> str:
 
   return render_template('newsletter/newsletter_edit.html', 
         newsletter=newsletter, 
-        form=form)
+        form=form,title=title)
 
 
 @newsLetter.route("/admin/newsletter/add", methods=["GET", "POST"]) 

@@ -2,29 +2,55 @@
 {% from "_formHelpers.html" import render_field %}
 {% block title %} {{ title }} {% endblock %}
 {% block maincontent %}
-<nav>
-  <div class="buttons">
-    <button type="button" class="btn btn-danger newLetterButton">
-      <a href="{{ url_for('newsletter.adminNewsletter') }}">
-        <i class='bx bx-message-add'></i>
-        Newsletters</a>
-    </button>
-  
-    <button type="button" class="btn btn-danger newLetterButton">
-      <a href="##">
-        <i class="bi bi-basket"></i>
-        Products</a>
-    </button>
+<nav class="d-flex justify-content-center">
+  <div class="buttonGroup">
+      <div class="wrapper">
+        <a class="animationButton" href="{{ url_for('newsletter.adminNewsletter') }}"><span>Newsletters</span></a>
+      </div>
+      <div class="wrapper">
+        <a class="animationButton" href="#"><span>Products</span></a>
+      </div>
   </div>
 </nav>
 <br/>
 <br/>
-<h3 class="adminh3">
-  Välkommen till din Admin Dashboard
-</h3>
+<div class="javascriptLove">
+</div>
+<br/>
+<div class="lorem">
+</div>
 
-<p>
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum, alias nobis a quaerat quas quia consequatur explicabo maxime sed odio repellendus? Similique ullam accusantium consequatur repellendus autem eos aliquid iste ratione dolorem ex, numquam soluta quisquam odio eveniet maxime molestiae rem quam possimus voluptatem laudantium? Ab, animi eius repudiandae repellat iure quo! Quod expedita a similique perspiciatis culpa? Natus maiores consectetur fugit officiis aut iure libero, praesentium dolorem optio quod recusandae repellat totam architecto, eius eos delectus. Doloribus at eius omnis illo nesciunt dicta asperiores aperiam commodi placeat soluta autem aut eveniet deserunt ea sequi, enim, et nulla velit fugiat.
-</p>
+<script>
+  "use strict";
+
+  const generateLoremList = function(string){
+    let loremText = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut pariatur eos voluptates expedita veniam deleniti, error exercitationem quia quidem dolore doloremque delectus aperiam voluptas in quibusdam non quasi omnis natus, veritatis perspiciatis enim saepe beatae. Odit voluptates tempore voluptate odio ipsum similique dolor labore accusantium ratione modi veniam, magnam libero nobis ea suscipit quis quos, tenetur aliquid molestias architecto? Necessitatibus voluptatem doloribus iure, nisi, dignissimos earum perspiciatis et error nesciunt a iusto quasi dolores aut voluptatibus in quae aspernatur! Et error voluptate adipisci minus fugit dolorum cumque autem molestias vitae perferendis temporibus delectus atque quisquam dolore ducimus aliquam, asperiores esse?"
+    const loremList = loremText.split(" ");
+    return loremList
+  }
+
+  const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+  }
+
+  const skapaText = async function(arr) {
+    javascriptLove();
+
+    for(let i = 0; i < arr.length; i++){
+      document.querySelector(".lorem").textContent += arr[i] + " ";
+      await sleep(20);
+    }
+  }
+
+  const javascriptLove = function() {
+    const addDiv = document.querySelector(".javascriptLove").textContent = '🎉 Welcome to the team champ! 🎉';
+  }
+
+  const loremList = generateLoremList();
+  // console.log(loremList);
+  skapaText(loremList);
+
+
+</script>
 
 {% endblock %}

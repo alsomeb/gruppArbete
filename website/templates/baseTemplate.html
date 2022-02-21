@@ -24,6 +24,9 @@
     <![endif]-->
 </head>
 <body>
+    <div class="loader-wrapper">
+        <span class="loader"><span class="loader-inner"></span></span>
+    </div>
     <!-- HEADER -->
     <header>
         <!-- TOP HEADER -->
@@ -339,6 +342,11 @@
     <script src="{{ url_for('static',filename='js/jquery.zoom.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/main.js') }}"></script>
     {% block scripts %}{% endblock %}                 
- 
+    <script>
+        // jquery loader
+        $(window).on("load", function(){
+            $(".loader-wrapper").fadeOut("slow");
+        });
+    </script>
 </body>
 </html>s
