@@ -8,6 +8,22 @@ from website.areas.newsletter.forms import EditNewsletter,CreateNewsletter
 
 newsLetter = Blueprint('newsletter', __name__)
 
+
+@newsLetter.route('/admin/newsletter/delete/<id>', methods=["POST", "GET"])
+@roles_required("Admin")
+def deleteLetterById(id):
+  getLetter = Newsletter.query.filter_by(id=id).first()
+  flash(f"Letter Id: {getLetter.id} with Title: {getLetter.title} deleted","danger")
+
+  # Deleted Receivers from assos. table
+  receivers = db.session.query(NewsletterInfo).filter(NewsletterInfo.letterId == id).delete()
+  db.session.commit()
+
+  # Removing the LetterById
+  letter = db.session.query(Newsletter).filter(Newsletter.id==id).delete()
+  db.session.commit()
+  return redirect(url_for('newsletter.adminNewsletter'))
+
 @newsLetter.route('/admin')
 @roles_required("Admin")
 def adminIndex() -> str:
@@ -19,7 +35,6 @@ def adminIndex() -> str:
 def adminNewsletter() -> str:
   title = "Newsletters"
   newsletters = db.session.query(Newsletter).all()
-  # sendTestMail()
   return render_template("newsletter/admin_letters.html", title=title, newsletters=newsletters)
 
 @newsLetter.route('/admin/newsletter/<id>', methods=["POST", "GET"])

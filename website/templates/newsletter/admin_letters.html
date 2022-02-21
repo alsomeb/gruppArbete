@@ -33,6 +33,9 @@
       <th scope="col">
         <i class="bi bi-card-text"></i>
         Newsletter Title</th>
+      <th scope="col">
+        Delete
+      </th>
     </tr>
   </thead>
   <tbody>
@@ -52,6 +55,11 @@
       </td>
       <td><a href="{{ url_for('newsletter.listLettersById', id=letter.id) }}"><strong>{{ letter.text }}</strong></a></td>
       <td><strong>{{ letter.title }}</strong></td>
+      <td>
+        <a href="{{ url_for('newsletter.deleteLetterById', id=letter.id) }}">
+          <i class='bx bx-x'></i>
+          Delete</a>
+      </td>
     </tr>
     {% endfor %}
     </tbody>
