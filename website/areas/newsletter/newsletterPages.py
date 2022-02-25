@@ -175,7 +175,7 @@ def gdpr():
 @roles_required("Admin")
 def deleteAccount():
   user = current_user._get_current_object() # den är cascade on delete, så userroles försvinner också!
-  flask_login.logout_user() #force logout
+  flask_login.logout_user() #force logout, removes current_user cookie
   db.session.delete(user)
   db.session.commit()
   flash("Konto borttaget, du blev utloggad!", "success")
