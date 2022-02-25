@@ -1,0 +1,90 @@
+{% extends "baseTemplate.html" %}
+{% from "_formHelpers.html" import render_field %}
+{% block title %} {{ title }} {% endblock %}
+{% block maincontent %}
+
+<div class="buttonz d-flex justify-content-center">
+    <button class="button-modall">
+        <a href="{{ url_for('user.change_password') }}">Byt Lösen</a>
+    </button>
+    <button class="show-modall">Radera Konto</button>
+</div>
+
+<div class="modall hidden">
+  <button class="close-modall">&times;</button>
+  <h1>Är du säker? 😱</h1>
+  <p>
+    Du håller på att ta bort ditt konto! Om du vill fortsätta så klicka på <strong>Jag Förstår</strong>.
+    Du kommer sedan att bli utloggad!
+  </p>
+  <div class="wrapper">
+    <a class="animationButton" href="{{ url_for('newsletter.deleteAccount') }}"><span>Jag Förstår</span></a>
+  </div>
+</div>
+<div class="overlay hidden"></div>
+
+
+<h1>GDPR</h3>
+<br>
+<br>
+<h3>This is the info we have collected on your account</h3>
+<p>Name: <strong>{{user.first_name}} {{user.last_name}}</strong></p>
+<p>Email: <strong>{{user.email}}</strong></p>
+<!--får en tuple och på index 2 är Role så role.name -->
+<p>Role: <strong> {{ userInfo[2].name }}</strong></p>
+
+<script>
+'use strict';
+
+// USE FOR DJANGO WEBSITE ?
+
+// Selecting elements we need -> Store into Variables
+const modal = document.querySelector('.modall');
+const overlay = document.querySelector('.overlay');
+const btnCloseModal = document.querySelector('.close-modall');
+
+// QuerySelector ONLY picks first one it finds!! so we need "querySelectorAll"
+// Nodelist, not exactly as an array but for us it will work as one
+const btnsOpenModal = document.querySelectorAll('.show-modall');
+console.log(btnsOpenModal);
+
+// instead of having an annonymous function we create our! DRY!
+const closeModal = function () {
+  modal.classList.add('hidden');
+  overlay.classList.add('hidden');
+};
+
+const openModal = function () {
+  // not dot, only for selector.. can add more classes with ","
+  // can also add classes
+  modal.classList.remove('hidden');
+  overlay.classList.remove('hidden');
+};
+
+// Looping over buttons Modals and adding an eventlisteners functions on all
+// <div class="modal hidden"> 2 classes on the div, WE REMOVE the hidden class.
+for (let i = 0; i < btnsOpenModal.length; i++) {
+  btnsOpenModal[i].addEventListener('click', openModal);
+}
+
+// WITHOUT () else it will call the function and exit eventlistener, we saved it with an function expression as an variable
+// ---------- Eventlistener for closing button
+btnCloseModal.addEventListener('click', closeModal);
+// ------------ Eventlistener for closing when pressing outside window
+overlay.addEventListener('click', closeModal);
+
+// Handling Key press events - GLOBAL, not element specific
+// Global === document, basically listening EVERYWHERE, ANY keypress
+
+// call the function with the event object as an argument
+//   console.log(event); // To find out info about the spec key
+//   console.log(event.key);
+document.addEventListener('keydown', function (event) {
+  // check if key pressed was ESC
+  // AND if modal does not contain the hidden css class, add it (close)
+  if (event.key === 'Escape' && !modal.classList.contains('hidden')) {
+    closeModal();
+  }
+});
+</script>
+{% endblock %}

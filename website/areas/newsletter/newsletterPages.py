@@ -1,11 +1,12 @@
+from crypt import methods
 from datetime import datetime
 from flask import Blueprint, render_template, flash, url_for, redirect, request
-from flask_user import roles_accepted, roles_required
+from flask_user import roles_accepted, roles_required, current_user
 from website.areas.newsletter.forms import CreateNewsletter, ChooseNewsletter
 from website.areas.newsletter.services import validate_EmailAddress, sendTestMail, sendNewsletters
-from website.models import SignupsNewsletter, Newsletter, db, NewsletterInfo
+from website.models import SignupsNewsletter, Newsletter, db, NewsletterInfo, User,Role,UserRoles
 from website.areas.newsletter.forms import EditNewsletter,CreateNewsletter
-
+import flask_login
 newsLetter = Blueprint('newsletter', __name__)
 
 
@@ -160,3 +161,24 @@ def send_newsletter():
         return redirect(url_for('newsletter.adminNewsletter'))
 
     return render_template('newsletter/send_newsletter.html',form=form,title=title)
+
+@newsLetter.route("/admin/gdpr", methods=["GET","POST"])
+@roles_required("Admin")
+def gdpr():
+  title = "My Info"
+  user = current_user
+  userInfo = db.session.query(User,UserRoles,Role).select_from(User).join(UserRoles).join(Role).filter(User.id==user.id).first()
+  return render_template('newsletter/gdpr.html', title=title, user=user, userInfo=userInfo)
+
+
+@newsLetter.route("/admin/deleteAccount", methods=["GET","POST"])
+@roles_required("Admin")
+def deleteAccount():
+  user = current_user._get_current_object() # den är cascade on delete, så userroles försvinner också!
+  flask_login.logout_user() #force logout
+  db.session.delete(user)
+  db.session.commit()
+  flash("Konto borttaget, du blev utloggad!", "success")
+  return redirect(url_for('product.index'))
+
+
